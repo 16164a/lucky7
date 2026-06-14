@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오늘의 행운자</title>
+
+<style>
+body{
+  margin:0;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:linear-gradient(
+    180deg,
+    #07120b,
+    #102515,
+    #0b1f12
+  );
+
+  font-family:sans-serif;
+  color:white;
+}
+
+.container{
+  text-align:center;
+  max-width:700px;
+  padding:40px;
+}
+
+.clover{
+  font-size:80px;
+  animation:float 3s ease-in-out infinite;
+}
+
+.seven{
+  font-size:160px;
+  color:#8cff9c;
+  font-weight:bold;
+
+  text-shadow:
+  0 0 20px #8cff9c,
+  0 0 40px #8cff9c;
+
+  animation:pulse 2s infinite;
+}
+
+h1{
+  font-size:48px;
+  margin:10px 0;
+}
+
+.message{
+  font-size:24px;
+  line-height:1.8;
+  margin-top:20px;
+}
+
+.lucky{
+  margin-top:30px;
+  font-size:18px;
+  color:#9fffaa;
+}
+
+@keyframes pulse{
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.08);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+}
+
+@keyframes float{
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-12px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="clover">🍀</div>
+
+<h1>오늘의 행운자</h1>
+
+<div class="seven">7</div>
+
+<div class="message" id="message">
+당신은 사라진 숫자 7을 발견했습니다.
+</div>
+
+<div class="lucky">
+12345689 속에서 발견된 행운
+</div>
+
+</div>
+
+<script>
+
+const messages = [
+
+"오늘 당신에게 작은 행운이 머물기를 바랍니다.",
+
+"생각보다 좋은 일이 가까이에 있습니다.",
+
+"당신의 선택을 믿어보세요.",
+
+"지금 걷고 있는 길도 충분히 의미 있습니다.",
+
+"오늘은 평소보다 조금 더 웃어보세요.",
+
+"행운은 이미 당신 곁에 와 있습니다.",
+
+"기다리던 소식이 생각보다 빨리 올지도 모릅니다.",
+
+"당신의 하루가 초록빛으로 물들기를 바랍니다.",
+
+"당신은 오늘의 행운자입니다.",
+
+"사라진 7은 이제 당신의 것입니다."
+];
+
+const randomMessage =
+messages[
+Math.floor(
+Math.random() * messages.length
+)
+];
+
+document.getElementById("message").innerHTML =
+randomMessage;
+
+</script>
+
+</body>
+</html>
