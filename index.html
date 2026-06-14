@@ -154,6 +154,30 @@ h1 {
   color: rgba(255,255,255,0.6);
 }
 
+#startBtn{
+  margin-top:30px;
+  padding:14px 24px;
+  border:none;
+  border-radius:30px;
+
+  background:#80ff91;
+  color:#07120b;
+
+  font-size:18px;
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  box-shadow:
+    0 0 20px rgba(128,255,145,0.4);
+}
+
+#startBtn:hover{
+  transform:scale(1.05);
+}
+
 .bg-seven {
   position: fixed;
   left: 50%;
@@ -179,6 +203,9 @@ h1 {
 </head>
 
 <body>
+<audio id="bgm" loop>
+  <source src="bgm.mp3" type="audio/mpeg">
+</audio>
 
 <div class="bg-seven">7</div>
 
@@ -198,6 +225,9 @@ h1 {
 
     <div class="scroll-guide">아래로 내려 행운 메시지를 열어보세요</div>
   </div>
+  <button id="startBtn">
+🍀 행운 받기
+</button>
 </section>
 
 <section>
@@ -270,6 +300,53 @@ function pick(list) {
 document.getElementById("msg1").innerText = pick(msg1List);
 document.getElementById("msg2").innerText = pick(msg2List);
 document.getElementById("msg3").innerText = pick(msg3List);
+</script>
+const bgm = document.getElementById("bgm");
+const btn = document.getElementById("startBtn");
+
+btn.addEventListener("click", () => {
+
+  playLuckyBell();
+
+  bgm.volume = 0.25;
+  bgm.play();
+
+  btn.innerText = "🍀 행운 수령 완료";
+});
+
+function playLuckyBell(){
+
+  const ctx =
+  new (window.AudioContext ||
+       window.webkitAudioContext)();
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = "sine";
+
+  osc.frequency.setValueAtTime(
+    880,
+    ctx.currentTime
+  );
+
+  gain.gain.setValueAtTime(
+    0.08,
+    ctx.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    ctx.currentTime + 1.2
+  );
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start();
+  osc.stop(ctx.currentTime + 1.2);
+
+}
 </script>
 
 </body>
