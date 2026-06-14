@@ -16,6 +16,7 @@ body {
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 section {
@@ -33,7 +34,8 @@ section {
   position: relative;
 }
 
-.ticket {
+.ticket {overflow-x: hidden;
+
   width: 100%;
   max-width: 360px;
   padding: 38px 26px;
@@ -223,6 +225,17 @@ h1 {
     opacity: 0;
   }
 }
+.locked-section {
+  display: none;
+}
+
+body.unlocked {
+  overflow-y: auto;
+}
+
+body.unlocked .locked-section {
+  display: flex;
+}
 </style>
 </head>
 
@@ -254,7 +267,7 @@ h1 {
 </button>
 </section>
 
-<section>
+<section class="locked-section">
   <div class="card">
     <div class="card-number">LUCKY MESSAGE 01</div>
     <div class="card-title">오늘 당신에게 전하는 말</div>
@@ -262,7 +275,7 @@ h1 {
   </div>
 </section>
 
-<section>
+<section class="locked-section">
   <div class="card">
     <div class="card-number">LUCKY MESSAGE 02</div>
     <div class="card-title">오늘의 징조</div>
@@ -270,7 +283,7 @@ h1 {
   </div>
 </section>
 
-<section>
+<section class="locked-section">
   <div class="card">
     <div class="card-number">LUCKY MESSAGE 03</div>
     <div class="card-title">당신을 위한 응원</div>
@@ -278,7 +291,7 @@ h1 {
   </div>
 </section>
 
-<section class="final">
+<section class="final locked-section">
   <div class="final-mark">✨</div>
   <div class="final-title">행운 수령 완료</div>
   <div class="final-text">
@@ -334,9 +347,16 @@ btn.addEventListener("click", () => {
 
   bgm.volume = 0.25;
   bgm.play()
-    .then(() => {
-      btn.innerText = "🍀 행운 수령 완료";
-    })
+  .then(() => {
+  btn.innerText = "🍀 행운 열림";
+
+  setTimeout(() => {
+    document.body.classList.add("unlocked");
+    document.querySelector(".locked-section").scrollIntoView({
+      behavior: "smooth"
+    });
+  }, 4200);
+})
     .catch((err) => {
       btn.innerText = "음악을 다시 눌러주세요";
       console.log(err);
