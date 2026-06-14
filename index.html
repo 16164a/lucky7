@@ -116,7 +116,25 @@ h1{
 </div>
 
 </div>
+<section class="scroll-section">
+  <h2>오늘 당신에게 전하는 말</h2>
+  <p id="msg1"></p>
+</section>
 
+<section class="scroll-section">
+  <h2>오늘의 행운</h2>
+  <p id="msg2"></p>
+</section>
+
+<section class="scroll-section">
+  <h2>오늘의 응원</h2>
+  <p id="msg3"></p>
+</section>
+
+<section class="ending">
+  <div class="end-number">12345689</div>
+  <div class="end-seven">7</div>
+</section>
 <script>
 
 const messages = [
@@ -141,6 +159,38 @@ const messages = [
 
 "사라진 7은 이제 당신의 것입니다."
 ];
+const msg1List = [
+"당신은 생각보다 훨씬 잘하고 있습니다.",
+"오늘의 선택을 믿어보세요.",
+"조금 느려도 괜찮습니다.",
+"당신의 노력은 사라지지 않습니다.",
+"지금의 걸음도 충분히 의미 있습니다."
+];
+
+const msg2List = [
+"오늘은 작은 우연을 놓치지 마세요.",
+"생각하지 못한 곳에서 기회가 올 수 있습니다.",
+"좋은 소식이 가까워지고 있습니다.",
+"누군가 당신을 응원하고 있습니다.",
+"행운은 이미 당신 곁에 와 있습니다."
+];
+
+const msg3List = [
+"포기하지 않은 당신이 멋집니다.",
+"당신은 이미 충분한 사람입니다.",
+"오늘 하루도 잘 버텨냈습니다.",
+"스스로를 조금 더 믿어보세요.",
+"당신의 내일을 응원합니다."
+];
+
+document.getElementById("msg1").innerText =
+msg1List[Math.floor(Math.random()*msg1List.length)];
+
+document.getElementById("msg2").innerText =
+msg2List[Math.floor(Math.random()*msg2List.length)];
+
+document.getElementById("msg3").innerText =
+msg3List[Math.floor(Math.random()*msg3List.length)];
 
 const randomMessage =
 messages[
