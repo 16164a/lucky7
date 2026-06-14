@@ -199,6 +199,30 @@ h1 {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-13px); }
 }
+.falling-clover {
+  position: fixed;
+  top: -80px;
+  z-index: 999;
+  font-size: 42px;
+  pointer-events: none;
+  animation: fallClover 4.5s ease-in forwards;
+}
+
+@keyframes fallClover {
+  0% {
+    transform: translateY(-80px) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
@@ -305,6 +329,8 @@ const btn = document.getElementById("startBtn");
 
 btn.addEventListener("click", () => {
   playLuckyBell();
+  dropSevenClovers();
+
 
   bgm.volume = 0.25;
   bgm.play()
@@ -334,6 +360,24 @@ function playLuckyBell() {
 
   osc.start();
   osc.stop(ctx.currentTime + 1.2);
+}
+function dropSevenClovers() {
+  for (let i = 0; i < 7; i++) {
+    const clover = document.createElement("div");
+
+    clover.className = "falling-clover";
+    clover.innerText = "🍀";
+
+    clover.style.left = Math.random() * 90 + "vw";
+    clover.style.animationDelay = i * 0.25 + "s";
+    clover.style.fontSize = 32 + Math.random() * 24 + "px";
+
+    document.body.appendChild(clover);
+
+    setTimeout(() => {
+      clover.remove();
+    }, 6000);
+  }
 }
 </script>
 
