@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>오늘의 행운자</title>
+<title>Lucky Guy</title>
 
 <style>
 * {
@@ -12,178 +12,261 @@
 
 body {
   margin: 0;
-  background: #06160c;
+  background: radial-gradient(circle at top, #14391d, #041108 70%);
   color: white;
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  overflow-x: hidden;
 }
 
 section {
   min-height: 100vh;
-  padding: 70px 28px;
+  padding: 70px 26px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
+/* 첫 화면 */
+.hero {
+  flex-direction: column;
+  position: relative;
+}
+
+.ticket {
+  width: 100%;
+  max-width: 360px;
+  padding: 38px 26px;
+  border-radius: 32px;
+  border: 1px solid rgba(139, 255, 153, 0.45);
+  background: rgba(255,255,255,0.06);
+  box-shadow:
+    0 0 40px rgba(128,255,145,0.22),
+    inset 0 0 30px rgba(128,255,145,0.08);
+}
+
 .clover {
-  font-size: 86px;
-  margin-bottom: 30px;
+  font-size: 76px;
   animation: float 3s ease-in-out infinite;
 }
 
 h1 {
-  font-size: 44px;
-  margin: 0 0 30px;
-  letter-spacing: -2px;
+  font-size: 40px;
+  margin: 24px 0 8px;
+  letter-spacing: -1.5px;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #9dffad;
+  margin-bottom: 26px;
 }
 
 .seven {
   font-size: 150px;
-  font-weight: 800;
-  color: #80ff91;
-  text-shadow: 0 0 25px #80ff91, 0 0 60px #80ff91;
-  margin-bottom: 40px;
-  animation: pulse 2s ease-in-out infinite;
+  font-weight: 900;
+  color: #83ff93;
+  text-shadow:
+    0 0 18px #83ff93,
+    0 0 45px #83ff93,
+    0 0 90px #83ff93;
+  animation: pulse 2.2s ease-in-out infinite;
 }
 
-.main-message {
-  font-size: 24px;
-  line-height: 1.7;
+.arrive {
+  font-size: 22px;
+  line-height: 1.6;
   word-break: keep-all;
-  max-width: 330px;
+  margin-top: 26px;
 }
 
 .scroll-guide {
-  margin-top: 50px;
-  font-size: 15px;
+  margin-top: 38px;
+  font-size: 14px;
   color: #9dffad;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
-.message-card {
+/* 메시지 카드 */
+.card {
   width: 100%;
-  max-width: 360px;
-  padding: 34px 26px;
-  border: 1px solid rgba(128, 255, 145, 0.35);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 0 30px rgba(128, 255, 145, 0.12);
+  max-width: 370px;
+  min-height: 440px;
+  padding: 36px 28px;
+  border-radius: 34px;
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,0.11),
+    rgba(255,255,255,0.02)
+  );
+  border: 1px solid rgba(128,255,145,0.3);
+  box-shadow: 0 0 34px rgba(128,255,145,0.14);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.message-title {
+.card-number {
   font-size: 18px;
   color: #9dffad;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+}
+
+.card-title {
+  font-size: 22px;
+  margin-bottom: 28px;
 }
 
 .random-message {
-  font-size: 26px;
-  line-height: 1.7;
+  font-size: 27px;
+  line-height: 1.65;
   word-break: keep-all;
 }
 
-.final-seven {
-  font-size: 120px;
-  color: #80ff91;
-  text-shadow: 0 0 30px #80ff91;
+/* 마지막 화면 */
+.final {
+  flex-direction: column;
+  position: relative;
+}
+
+.final-mark {
+  font-size: 88px;
+  margin-bottom: 26px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.final-title {
+  font-size: 32px;
+  color: #9dffad;
+  margin-bottom: 22px;
 }
 
 .final-text {
-  font-size: 24px;
+  max-width: 350px;
+  font-size: 25px;
   line-height: 1.7;
-  max-width: 340px;
   word-break: keep-all;
 }
 
+.final-small {
+  margin-top: 36px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+}
+
+.bg-seven {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 420px;
+  font-weight: 900;
+  color: rgba(128,255,145,0.035);
+  pointer-events: none;
+  z-index: -1;
+}
+
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.07); }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.86; }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+  50% { transform: translateY(-13px); }
 }
 </style>
 </head>
 
 <body>
 
-<section>
-  <div class="clover">🍀</div>
-  <h1>오늘의 행운자</h1>
-  <div class="seven">7</div>
-  <div class="main-message" id="mainMessage"></div>
-  <div class="scroll-guide">아래로 내려 오늘의 메시지를 받아보세요</div>
+<div class="bg-seven">7</div>
+
+<section class="hero">
+  <div class="ticket">
+    <div class="clover">🍀</div>
+
+    <h1>당신은 럭키가이</h1>
+    <div class="subtitle">You're a lucky guy</div>
+
+    <div class="seven">7</div>
+
+    <div class="arrive">
+      오늘의 행운은<br>
+      당신에게 도착했습니다.
+    </div>
+
+    <div class="scroll-guide">아래로 내려 행운 메시지를 열어보세요</div>
+  </div>
 </section>
 
 <section>
-  <div class="message-card">
-    <div class="message-title">오늘 당신에게 전하는 말</div>
+  <div class="card">
+    <div class="card-number">LUCKY MESSAGE 01</div>
+    <div class="card-title">오늘 당신에게 전하는 말</div>
     <div class="random-message" id="msg1"></div>
   </div>
 </section>
 
 <section>
-  <div class="message-card">
-    <div class="message-title">오늘의 행운</div>
+  <div class="card">
+    <div class="card-number">LUCKY MESSAGE 02</div>
+    <div class="card-title">오늘의 징조</div>
     <div class="random-message" id="msg2"></div>
   </div>
 </section>
 
 <section>
-  <div class="message-card">
-    <div class="message-title">오늘의 응원</div>
+  <div class="card">
+    <div class="card-number">LUCKY MESSAGE 03</div>
+    <div class="card-title">당신을 위한 응원</div>
     <div class="random-message" id="msg3"></div>
   </div>
 </section>
 
-<section>
-  <div class="final-seven">7</div>
+<section class="final">
+  <div class="final-mark">✨</div>
+  <div class="final-title">행운 수령 완료</div>
   <div class="final-text">
-    사라졌던 행운은<br>
-    오늘 당신에게 도착했습니다.
+    이제 이 행운은<br>
+    화면이 아니라<br>
+    당신의 하루 속에서<br>
+    계속 이어집니다.
+  </div>
+  <div class="final-small">
+    이 페이지를 닫아도 행운은 사라지지 않습니다.
   </div>
 </section>
 
 <script>
-const mainMessages = [
-  "당신은 사라진 숫자 7을 발견했습니다.",
-  "오늘의 행운은 당신에게 도착했습니다.",
-  "당신이 찾던 행운이 여기에 있습니다."
-];
-
 const msg1List = [
-  "조금 느려도 괜찮습니다. 당신은 충분히 잘 가고 있습니다.",
-  "지금의 걸음도 분명 의미 있는 방향으로 향하고 있습니다.",
-  "당신의 하루가 조용히 빛나기를 바랍니다.",
-  "오늘은 스스로에게 조금 더 다정해져도 좋습니다.",
-  "당신이 견뎌온 시간은 결코 사라지지 않습니다."
+  "조금 느려도 괜찮습니다. 당신은 이미 충분히 멀리 왔습니다.",
+  "당신이 지나온 시간은 사라지지 않고 조용히 쌓이고 있습니다.",
+  "오늘은 스스로에게 조금 더 다정해져도 좋은 날입니다.",
+  "불안한 마음에도 계속 걸어온 당신을 응원합니다.",
+  "당신의 속도는 틀린 것이 아니라 당신만의 리듬입니다."
 ];
 
 const msg2List = [
-  "생각보다 좋은 일이 가까이에 있습니다.",
-  "작은 우연이 오늘의 행운이 될 수 있습니다.",
-  "기다리던 소식이 예상보다 빨리 올지도 모릅니다.",
-  "오늘 만나는 순간들 속에 작은 선물이 숨어 있습니다.",
-  "행운은 이미 당신 곁에 와 있습니다."
+  "오늘 마주치는 작은 우연 하나를 그냥 지나치지 마세요.",
+  "예상하지 못한 순간에 좋은 방향이 열릴 수 있습니다.",
+  "당신이 놓쳤다고 생각한 것이 다른 모습으로 돌아올지도 모릅니다.",
+  "오늘의 행운은 아주 작은 신호처럼 다가올 수 있습니다.",
+  "익숙한 길에서 새로운 장면을 발견하게 될지도 모릅니다."
 ];
 
 const msg3List = [
-  "포기하지 않은 당신이 멋집니다.",
-  "당신은 이미 충분한 사람입니다.",
-  "오늘 하루도 잘 버텨냈습니다.",
-  "스스로를 조금 더 믿어보세요.",
-  "당신의 내일을 응원합니다."
+  "포기하지 않은 당신이 가장 빛나고 있습니다.",
+  "당신은 이미 충분한 사람입니다. 더 증명하지 않아도 괜찮습니다.",
+  "오늘 하루도 잘 버텨낸 당신에게 박수를 보냅니다.",
+  "당신의 내일은 오늘보다 조금 더 부드러워질 수 있습니다.",
+  "지금의 당신에게도 행운이 머물 자격은 충분합니다."
 ];
 
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-document.getElementById("mainMessage").innerText = pick(mainMessages);
 document.getElementById("msg1").innerText = pick(msg1List);
 document.getElementById("msg2").innerText = pick(msg2List);
 document.getElementById("msg3").innerText = pick(msg3List);
