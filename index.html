@@ -300,54 +300,43 @@ function pick(list) {
 document.getElementById("msg1").innerText = pick(msg1List);
 document.getElementById("msg2").innerText = pick(msg2List);
 document.getElementById("msg3").innerText = pick(msg3List);
-</script>
 const bgm = document.getElementById("bgm");
 const btn = document.getElementById("startBtn");
 
 btn.addEventListener("click", () => {
-
   playLuckyBell();
 
   bgm.volume = 0.25;
-  bgm.play();
-
-  btn.innerText = "🍀 행운 수령 완료";
+  bgm.play()
+    .then(() => {
+      btn.innerText = "🍀 행운 수령 완료";
+    })
+    .catch((err) => {
+      btn.innerText = "음악을 다시 눌러주세요";
+      console.log(err);
+    });
 });
 
-function playLuckyBell(){
-
-  const ctx =
-  new (window.AudioContext ||
-       window.webkitAudioContext)();
+function playLuckyBell() {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
 
   osc.type = "sine";
+  osc.frequency.setValueAtTime(880, ctx.currentTime);
 
-  osc.frequency.setValueAtTime(
-    880,
-    ctx.currentTime
-  );
-
-  gain.gain.setValueAtTime(
-    0.08,
-    ctx.currentTime
-  );
-
-  gain.gain.exponentialRampToValueAtTime(
-    0.0001,
-    ctx.currentTime + 1.2
-  );
+  gain.gain.setValueAtTime(0.08, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.2);
 
   osc.connect(gain);
   gain.connect(ctx.destination);
 
   osc.start();
   osc.stop(ctx.currentTime + 1.2);
-
 }
 </script>
+
 
 </body>
 </html>
